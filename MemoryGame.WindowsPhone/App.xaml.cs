@@ -8,7 +8,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using MemoryGame.WindowsPhone.Resources;
 
-namespace Puzzle
+namespace MemoryGame.WindowsPhone
 {
     public partial class App : Application
     {

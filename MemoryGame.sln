@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryGame.Core.Tests", "Me
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryGame.WindowsPhone", "MemoryGame.WindowsPhone\MemoryGame.WindowsPhone.csproj", "{D88C5672-9C3D-4AB8-B32F-E7C68FE6ED8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryGame.Application", "MemoryGame.Application\MemoryGame.Application.csproj", "{E629A914-5A66-4B2D-B464-EB198D2CCABF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,18 @@ Global
 		{D88C5672-9C3D-4AB8-B32F-E7C68FE6ED8B}.Release|x86.ActiveCfg = Release|x86
 		{D88C5672-9C3D-4AB8-B32F-E7C68FE6ED8B}.Release|x86.Build.0 = Release|x86
 		{D88C5672-9C3D-4AB8-B32F-E7C68FE6ED8B}.Release|x86.Deploy.0 = Release|x86
+		{E629A914-5A66-4B2D-B464-EB198D2CCABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E629A914-5A66-4B2D-B464-EB198D2CCABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E629A914-5A66-4B2D-B464-EB198D2CCABF}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{E629A914-5A66-4B2D-B464-EB198D2CCABF}.Debug|ARM.Build.0 = Debug|Any CPU
+		{E629A914-5A66-4B2D-B464-EB198D2CCABF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E629A914-5A66-4B2D-B464-EB198D2CCABF}.Debug|x86.Build.0 = Debug|Any CPU
+		{E629A914-5A66-4B2D-B464-EB198D2CCABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E629A914-5A66-4B2D-B464-EB198D2CCABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E629A914-5A66-4B2D-B464-EB198D2CCABF}.Release|ARM.ActiveCfg = Release|Any CPU
+		{E629A914-5A66-4B2D-B464-EB198D2CCABF}.Release|ARM.Build.0 = Release|Any CPU
+		{E629A914-5A66-4B2D-B464-EB198D2CCABF}.Release|x86.ActiveCfg = Release|Any CPU
+		{E629A914-5A66-4B2D-B464-EB198D2CCABF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

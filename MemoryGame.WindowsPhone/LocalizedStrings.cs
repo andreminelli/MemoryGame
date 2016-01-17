@@ -1,7 +1,7 @@
 ﻿
 using MemoryGame.WindowsPhone.Resources;
 
-namespace Puzzle
+namespace MemoryGame.WindowsPhone
 {
     /// <summary>
     /// Provides access to string resources.
