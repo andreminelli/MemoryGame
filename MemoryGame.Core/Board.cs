@@ -13,23 +13,23 @@ namespace MemoryGame.Core
         }
     }
 
-    public class Board<T> : IEnumerable<Piece<T>>
+    public class Board<T> : IEnumerable<Card<T>>
     {
         readonly int numberOfPairs;
-        readonly Piece<T>[] places;
+        readonly Card<T>[] places;
 
-        public Board(IEnumerable<Piece<T>> pieces)
+        public Board(IEnumerable<Card<T>> pieces)
         {
             this.numberOfPairs = pieces.Count();
-            this.places = new Piece<T>[numberOfPairs * 2];
+            this.places = new Card<T>[numberOfPairs * 2];
             ShuffleInBoard(pieces);
         }
 
-        public IEnumerator<Piece<T>> GetEnumerator() => this.places.Cast<Piece<T>>().GetEnumerator();
+        public IEnumerator<Card<T>> GetEnumerator() => this.places.Cast<Card<T>>().GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        void ShuffleInBoard(IEnumerable<Piece<T>> pieces)
+        void ShuffleInBoard(IEnumerable<Card<T>> pieces)
         {
             for (var i = 0; i < numberOfPairs; i++)
             {

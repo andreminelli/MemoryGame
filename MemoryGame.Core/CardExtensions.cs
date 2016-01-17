@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace MemoryGame.Core
 {
-    public static class PieceExtensions
+    public static class CardExtensions
     {
-        public static IEnumerable<Piece<T>> ToPieces<T>(this T[] values)
+        public static IEnumerable<Card<T>> ToPieces<T>(this T[] values)
         {
             for(var i=0; i<values.Length; i++)
             {
-                yield return new Piece<T>(values[i]);
+                yield return new Card<T>(values[i]);
             }
         }
     }

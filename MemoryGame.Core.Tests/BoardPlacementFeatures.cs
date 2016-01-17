@@ -9,7 +9,7 @@ using Shouldly;
 namespace MemoryGame.Core.Tests
 {
     [TestFixture]
-    public class BoardFeatures
+    public class BoardPlacementFeatures
     {
         int[] pieces = { 1, 2, 3, 4, 5, 6, 7 };
         int numberOfPairs;
@@ -35,7 +35,7 @@ namespace MemoryGame.Core.Tests
         }
 
         [Test]
-        public void NumberOfPiecesIsDoubleNumberOfPairs()
+        public void NumberOfCardsIsDoubleNumberOfPairs()
         {
             // Arrange
 
@@ -47,35 +47,35 @@ namespace MemoryGame.Core.Tests
         }
 
         [Test]
-        public void AllPiecesHavePairs()
+        public void AllCardsHavePairs()
         {
             // Arrange
 
             // Act
-            var pieceGroups = board.GroupBy(p => p);
+            var cardGroups = board.GroupBy(p => p);
 
             // Assert
-            pieceGroups.Count().ShouldBe(numberOfPairs);
-            pieceGroups.ShouldAllBe(g => g.Count() == 2);
+            cardGroups.Count().ShouldBe(numberOfPairs);
+            cardGroups.ShouldAllBe(g => g.Count() == 2);
         }
 
         [Test]
-        public void PiecesAreRandomlyDistributed()
+        public void CardsAreRandomlyDistributed()
         {
             // Arrange
-            var piecePositions = new HashSet<int>();
+            var cardPositions = new HashSet<int>();
 
             // Act
             for(var i=0; i < 400; i++)
             {
                 Setup();
-                var firstPiece = board.First();
-                var matchPosition = board.ToList().FindIndex(1, p => p == firstPiece);
-                piecePositions.Add(matchPosition);
+                var firstCard = board.First();
+                var matchPosition = board.ToList().FindIndex(1, p => p == firstCard);
+                cardPositions.Add(matchPosition);
             }
 
             // Assert
-            piecePositions.Count().ShouldBeGreaterThanOrEqualTo(numberOfPairs-1);
+            cardPositions.Count().ShouldBeGreaterThanOrEqualTo(numberOfPairs-1);
         }
     }
 }

@@ -4,11 +4,11 @@ using System.Diagnostics;
 namespace MemoryGame.Core
 {
     [DebuggerDisplay("Piece {value}")]
-    public class Piece<T>
+    public class Card<T>
     {
         internal readonly T value;
 
-        public Piece(T value)
+        public Card(T value)
         {
             if (default(T).Equals(value))
                 throw new ArgumentException();
@@ -17,7 +17,7 @@ namespace MemoryGame.Core
 
         public override bool Equals(object obj)
         {
-            var pieceObj = obj as Piece<T>;
+            var pieceObj = obj as Card<T>;
             if (pieceObj != null)
             {
                 return value.Equals(pieceObj.value);
