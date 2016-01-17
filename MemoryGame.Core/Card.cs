@@ -15,6 +15,8 @@ namespace MemoryGame.Core
             this.value = value;
         }
 
+        public CardStatus Status { get; private set; }
+
         public override bool Equals(object obj)
         {
             var pieceObj = obj as Card<T>;
@@ -26,5 +28,20 @@ namespace MemoryGame.Core
         }
 
         public override int GetHashCode() => value.GetHashCode();
+
+        public void TurnUp()
+        {
+            Status = CardStatus.Up;
+        }
+
+        public void TurnDown()
+        {
+            Status = CardStatus.Down;
+        }
+
+        public void Match()
+        {
+            Status = CardStatus.Matched;
+        }
     }
 }

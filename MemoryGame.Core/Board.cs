@@ -15,13 +15,20 @@ namespace MemoryGame.Core
 
     public class Board<T> : IEnumerable<Card<T>>
     {
+        public const int NONE = -1;
+
         readonly int numberOfPairs;
         readonly Card<T>[] places;
+
+        int currentCardUp = NONE;
+
+        public int RemainingPairs { get; private set; }
 
         public Board(IEnumerable<Card<T>> pieces)
         {
             this.numberOfPairs = pieces.Count();
             this.places = new Card<T>[numberOfPairs * 2];
+            this.RemainingPairs = numberOfPairs;
             ShuffleInBoard(pieces);
         }
 
@@ -43,6 +50,44 @@ namespace MemoryGame.Core
             randomPlaces.CopyTo(this.places, 0);
         }
 
+        public void TurnUp(int cardPosition)
+        {
+            this.places[cardPosition].TurnUp();
 
+            if (currentCardUp == NONE)
+            {
+                currentCardUp = cardPosition;
+            }
+            else
+            {
+                if (places[currentCardUp] == places[cardPosition])
+                {
+                    places[currentCardUp].Match();
+                    places[cardPosition].Match();
+                    RemainingPairs--;
+                }
+                else
+                {
+                    places[currentCardUp].TurnDown();
+                    places[cardPosition].TurnDown();
+                }
+
+                currentCardUp = NONE;
+            }
+        }
+
+        internal int FindMatch(int cardPosition)
+        {
+            var cardToFind = places.ElementAt(cardPosition);
+            for (var position = 0; position < places.Length; position++)
+            {
+                if (position != cardPosition && cardToFind == places[position])
+                {
+                    return position;
+                }
+            }
+
+            return NONE;
+        }
     }
 }
