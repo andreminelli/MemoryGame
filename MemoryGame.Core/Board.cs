@@ -52,10 +52,9 @@ namespace MemoryGame.Core
 
         public void TurnUp(int cardPosition)
         {
-            this.places[cardPosition].TurnUp();
-
             if (currentCardUp == NONE)
             {
+                places[cardPosition].TurnUp();
                 currentCardUp = cardPosition;
             }
             else
