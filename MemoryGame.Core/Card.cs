@@ -32,17 +32,17 @@ namespace MemoryGame.Core
 
         public override int GetHashCode() => Value.GetHashCode();
 
-        public void TurnUp()
+        internal void TurnUp()
         {
             Status = CardStatus.Up;
         }
 
-        public void TurnDown()
+        internal void TurnDown()
         {
             Status = CardStatus.Down;
         }
 
-        public void Match()
+        internal void Match()
         {
             Status = CardStatus.Matched;
         }
