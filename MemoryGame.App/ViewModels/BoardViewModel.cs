@@ -1,4 +1,5 @@
-﻿using MemoryGame.Core;
+﻿using Cirrious.MvvmCross.ViewModels;
+using MemoryGame.Core;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 namespace MemoryGame.App.ViewModels
 {
     [ImplementPropertyChanged]
-    public class BoardViewModel
+    public class BoardViewModel : MvxViewModel
     {
         Board<string> board;
 

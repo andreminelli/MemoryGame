@@ -13,7 +13,7 @@ namespace MemoryGame.Core
 
         public Card(T value)
         {
-            if (default(T).Equals(value))
+            if (value.Equals(default(T)))
                 throw new ArgumentException();
             Value = value;
         }

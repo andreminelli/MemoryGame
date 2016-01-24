@@ -1,25 +1,14 @@
-﻿using MemoryGame.WP8.Pages;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
-namespace MemoryGame.WP8
+namespace MemoryGame.WP
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -95,10 +84,16 @@ namespace MemoryGame.WP8
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
-                {
-                    throw new Exception("Failed to create initial page");
-                }
+                //if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
+                //{
+                //    throw new Exception("Failed to create initial page");
+                //}
+
+                var setup = new Setup(rootFrame);
+                setup.Initialize();
+
+                var start = Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>();
+                start.Start();
             }
 
             // Ensure the current window is active
