@@ -20,6 +20,7 @@ namespace MemoryGame.App.ViewModels
         public BoardViewModel()
         {
             board = Board.From(new[] { "!", "N", ",", "k", "b", "v", "w", "z", "A" });
+            Cards = new ObservableCollection<CardViewModel>(board.Select(c => new CardViewModel(c)));
         }
     }
 }

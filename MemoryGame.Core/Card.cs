@@ -6,13 +6,16 @@ namespace MemoryGame.Core
     [DebuggerDisplay("Piece {value}")]
     public class Card<T>
     {
-        internal readonly T value;
+        public T Value
+        {
+            get;
+        }
 
         public Card(T value)
         {
             if (default(T).Equals(value))
                 throw new ArgumentException();
-            this.value = value;
+            Value = value;
         }
 
         public CardStatus Status { get; private set; }
@@ -22,12 +25,12 @@ namespace MemoryGame.Core
             var pieceObj = obj as Card<T>;
             if (pieceObj != null)
             {
-                return value.Equals(pieceObj.value);
+                return Value.Equals(pieceObj.Value);
             }
-            return value.Equals(obj);
+            return Value.Equals(obj);
         }
 
-        public override int GetHashCode() => value.GetHashCode();
+        public override int GetHashCode() => Value.GetHashCode();
 
         public void TurnUp()
         {
