@@ -70,7 +70,7 @@ namespace MemoryGame.Core.Tests
             {
                 Setup();
                 var firstCard = board.First();
-                var matchPosition = board.ToList().FindIndex(1, p => p == firstCard);
+                var matchPosition = board.ToList().FindIndex(1, p => p.IsMatch(firstCard));
                 cardPositions.Add(matchPosition);
             }
 

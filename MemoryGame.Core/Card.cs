@@ -3,13 +3,15 @@ using System.Diagnostics;
 
 namespace MemoryGame.Core
 {
-    [DebuggerDisplay("Piece {value}")]
+    [DebuggerDisplay("Piece {Value}")]
     public class Card<T>
     {
         public T Value
         {
             get;
         }
+
+        public event EventHandler StatusChanged;
 
         public Card(T value)
         {
@@ -19,6 +21,11 @@ namespace MemoryGame.Core
         }
 
         public CardStatus Status { get; private set; }
+
+        public bool IsMatch(Card<T> other)
+        {
+            return this.Equals(other);
+        }
 
         public override bool Equals(object obj)
         {
@@ -34,17 +41,31 @@ namespace MemoryGame.Core
 
         internal void TurnUp()
         {
-            Status = CardStatus.Up;
+            SetStatus(CardStatus.Up);
         }
 
         internal void TurnDown()
         {
-            Status = CardStatus.Down;
+            SetStatus(CardStatus.Down);
         }
 
         internal void Match()
         {
-            Status = CardStatus.Matched;
+            SetStatus(CardStatus.Matched);
+        }
+
+        void SetStatus(CardStatus newStatus)
+        {
+            if (Status != newStatus)
+            {
+                Status = newStatus;
+                OnStatusChanged();
+            }
+        }
+
+        void OnStatusChanged()
+        {
+            StatusChanged?.Invoke(this, new EventArgs());
         }
     }
 }

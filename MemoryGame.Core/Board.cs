@@ -42,7 +42,7 @@ namespace MemoryGame.Core
             {
                 var piece = pieces.ElementAt(i);
                 this.places[i] = piece;
-                this.places[numberOfPairs + i] = piece;
+                this.places[numberOfPairs + i] = new Card<T>(piece.Value);
             }
 
             var rnd = new Random((int)DateTime.Now.Ticks);
@@ -59,7 +59,7 @@ namespace MemoryGame.Core
             }
             else
             {
-                if (places[currentCardUp] == places[cardPosition])
+                if (places[currentCardUp].IsMatch(places[cardPosition]))
                 {
                     places[currentCardUp].Match();
                     places[cardPosition].Match();
@@ -80,7 +80,7 @@ namespace MemoryGame.Core
             var cardToFind = places.ElementAt(cardPosition);
             for (var position = 0; position < places.Length; position++)
             {
-                if (position != cardPosition && cardToFind == places[position])
+                if (position != cardPosition && cardToFind.IsMatch(places[position]))
                 {
                     return position;
                 }
