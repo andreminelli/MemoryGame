@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace MemoryGame.App.ViewModels
 {
@@ -18,10 +19,18 @@ namespace MemoryGame.App.ViewModels
 
         public ObservableCollection<CardViewModel> Cards { get; }
 
+        public ICommand TurnUp { get; }
+
         public BoardViewModel()
         {
             board = Board.From(new[] { "!", "N", ",", "k", "b", "v", "w", "z", "A" });
-            Cards = new ObservableCollection<CardViewModel>(board.Select(c => new CardViewModel(c)));
+            Cards = new ObservableCollection<CardViewModel>(board.Select((c,i) => new CardViewModel(c,i)));
+            TurnUp = new MvxCommand<int>(TurnUpAction);
+        }
+
+        void TurnUpAction(int position)
+        {
+            board.TurnUp(position);
         }
     }
 }

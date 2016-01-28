@@ -86,6 +86,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CardStatusTemplateSelector.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
@@ -142,6 +143,10 @@
     <ProjectReference Include="..\MemoryGame.App\MemoryGame.App.csproj">
       <Project>{e629a914-5a66-4b2d-b464-eb198d2ccabf}</Project>
       <Name>MemoryGame.App</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MemoryGame.Core\MemoryGame.Core.csproj">
+      <Project>{4c56974b-7f3e-4934-96d4-8c6277b0619f}</Project>
+      <Name>MemoryGame.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
