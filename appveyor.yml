@@ -1,0 +1,8 @@
+﻿version: 1.0.{build}
+assembly_info:
+  patch: true
+  assembly_version: '{version}'
+configuration:
+  - Release
+before_build:
+  - nuget restore
