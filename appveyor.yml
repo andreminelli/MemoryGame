@@ -3,6 +3,7 @@ assembly_info:
   patch: true
   assembly_version: '{version}'
 configuration:
+  - Debug
   - Release
 before_build:
   - nuget restore
