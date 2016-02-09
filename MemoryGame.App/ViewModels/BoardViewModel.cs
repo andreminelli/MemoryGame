@@ -23,7 +23,7 @@ namespace MemoryGame.App.ViewModels
 
         public BoardViewModel()
         {
-            board = Board.From(new[] { "!", "N", ",", "k", "b", "v", "w", "z", "A" });
+            board = Board.From(new[] { "!", "N", ",", "K", "#", "v", "w", "z", "A" });
             Cards = new ObservableCollection<CardViewModel>(board.Select((c,i) => new CardViewModel(c,i)));
             TurnUp = new MvxCommand<int>(TurnUpAction);
         }
