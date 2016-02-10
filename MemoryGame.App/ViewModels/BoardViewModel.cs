@@ -17,7 +17,9 @@ namespace MemoryGame.App.ViewModels
     {
         Board<string> board;
 
-        public ObservableCollection<CardViewModel> Cards { get; }
+        private TurnResult currentTurnResult;
+
+        public IList<CardViewModel> Cards { get; }
 
         public ICommand TurnUp { get; }
 
@@ -25,19 +27,30 @@ namespace MemoryGame.App.ViewModels
         {
             board = Board.From(new[] { "!", "N", ",", "K", "#", "v", "w", "z", "A" });
             board.TurnEnded += Board_TurnEnded;
-            Cards = new ObservableCollection<CardViewModel>(board.Select((c,i) => new CardViewModel(c,i)));
-            TurnUp = new MvxCommand<int>(async (p) => await TurnUpAction(p));
+            currentTurnResult = TurnResult.Pending;
+
+            Cards = new List<CardViewModel>(board.Select((c,i) => new CardViewModel(c,i)));
+            TurnUp = new MvxCommand<int>(async (p) => await TurnUpActionAsync(p));
         }
 
-        Task TurnUpAction(int position) => board.TurnUp(position);
+        async Task TurnUpActionAsync(int position)
+        {
+            if (currentTurnResult == TurnResult.Pending)
+            {
+                await board.TurnUp(position);
+            }
+        }
 
         async void Board_TurnEnded(object sender, TurnResultEventArgs args)
         {
+            currentTurnResult = args.Result;
+
             using (args.GetDeferral())
             {
-                if (!args.Result.Equals(TurnResult.Pending))
+                if (currentTurnResult != TurnResult.Pending)
                 {
                     await Task.Delay(2000);
+                    currentTurnResult = TurnResult.Pending;
                 }
             }
         }
