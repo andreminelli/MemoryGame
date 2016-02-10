@@ -10,21 +10,24 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <views:MvxWindowsPage.Resources>
+        <x:Double x:Key="CardDimension">100</x:Double>
+        <x:Double x:Key="CardFontSize">60</x:Double>
         <DataTemplate x:Key="CardUpTemplate">
             <StackPanel>
-                <TextBlock FontFamily="Wingdings" FontSize="50" Text="{Binding Value}" />
+                <TextBlock FontFamily="Wingdings" FontSize="{StaticResource CardFontSize}" Text="{Binding Value}" />
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="CardDownTemplate">
-            <Button Command="{Binding ElementName=ContentRoot, Path=DataContext.TurnUp}" CommandParameter="{Binding BoardPosition}">
+            <Button BorderThickness="0"
+                Command="{Binding ElementName=ContentRoot, Path=DataContext.TurnUp}" CommandParameter="{Binding BoardPosition}">
                 <StackPanel>
-                    <TextBlock FontFamily="Wingdings" FontSize="50" Text="o" />
+                    <TextBlock FontFamily="Wingdings" FontSize="{StaticResource CardFontSize}" Text="o" />
                 </StackPanel>
             </Button>
         </DataTemplate>
         <DataTemplate x:Key="CardMatchedTemplate">
             <StackPanel>
-                <TextBlock FontFamily="Wingdings" FontSize="50" Text="x" />
+                <TextBlock FontFamily="Wingdings" FontSize="{StaticResource CardFontSize}" Text="x" />
             </StackPanel>
         </DataTemplate>
         <controls:CardStatusTemplateSelector x:Key="CardStatusTemplate"
@@ -57,7 +60,7 @@
                       ItemsSource="{Binding Cards}">
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="5" />
+                        <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="5" ItemWidth="{StaticResource CardDimension}" ItemHeight="{StaticResource CardDimension}" />
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
             </GridView>
