@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MemoryGame.Core
 {
@@ -24,6 +25,8 @@ namespace MemoryGame.Core
 
         public int RemainingPairs { get; private set; }
 
+        public event EventHandler<TurnResultEventArgs> TurnEnded;
+
         public Board(IEnumerable<Card<T>> pieces)
         {
             this.numberOfPairs = pieces.Count();
@@ -31,7 +34,35 @@ namespace MemoryGame.Core
             this.RemainingPairs = numberOfPairs;
             ShuffleInBoard(pieces);
         }
+        
+        public async Task TurnUp(int cardPosition)
+        {
+            places[cardPosition].TurnUp();
+            if (currentCardUp == NONE)
+            {
+                await OnTurnEndedAsync(TurnResult.Pending);
+                currentCardUp = cardPosition;
+            }
+            else
+            {
+                if (places[currentCardUp].IsMatch(places[cardPosition]))
+                {
+                    await OnTurnEndedAsync(TurnResult.Match);
+                    places[currentCardUp].Match();
+                    places[cardPosition].Match();
+                    RemainingPairs--;
+                }
+                else
+                {
+                    await OnTurnEndedAsync(TurnResult.Mismatch);
+                    places[currentCardUp].TurnDown();
+                    places[cardPosition].TurnDown();
+                }
 
+                currentCardUp = NONE;
+            }
+        }
+       
         public IEnumerator<Card<T>> GetEnumerator() => this.places.Cast<Card<T>>().GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -50,29 +81,11 @@ namespace MemoryGame.Core
             randomPlaces.CopyTo(this.places, 0);
         }
 
-        public void TurnUp(int cardPosition)
+        Task OnTurnEndedAsync(TurnResult result)
         {
-            if (currentCardUp == NONE)
-            {
-                places[cardPosition].TurnUp();
-                currentCardUp = cardPosition;
-            }
-            else
-            {
-                if (places[currentCardUp].IsMatch(places[cardPosition]))
-                {
-                    places[currentCardUp].Match();
-                    places[cardPosition].Match();
-                    RemainingPairs--;
-                }
-                else
-                {
-                    places[currentCardUp].TurnDown();
-                    places[cardPosition].TurnDown();
-                }
-
-                currentCardUp = NONE;
-            }
+            var args = new TurnResultEventArgs(result);
+            TurnEnded?.Invoke(this, args);
+            return args.WaitForDeferralsAsync();
         }
 
         internal int FindMatch(int cardPosition)

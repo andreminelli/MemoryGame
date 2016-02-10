@@ -41,26 +41,32 @@ namespace MemoryGame.Core
 
         internal void TurnUp()
         {
-            SetStatus(CardStatus.Up);
+            if (Status == CardStatus.Down)
+            {
+                SetStatus(CardStatus.Up);
+            }
         }
 
         internal void TurnDown()
         {
-            SetStatus(CardStatus.Down);
+            if (Status == CardStatus.Up)
+            {
+                SetStatus(CardStatus.Down);
+            }
         }
 
         internal void Match()
         {
-            SetStatus(CardStatus.Matched);
+            if (Status == CardStatus.Up)
+            {
+                SetStatus(CardStatus.Matched);
+            }
         }
 
         void SetStatus(CardStatus newStatus)
         {
-            if (Status != newStatus)
-            {
-                Status = newStatus;
-                OnStatusChanged();
-            }
+            Status = newStatus;
+            OnStatusChanged();
         }
 
         void OnStatusChanged()
