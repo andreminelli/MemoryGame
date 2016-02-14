@@ -16,7 +16,9 @@ namespace MemoryGame.Core
 
     public class Board<T> : IEnumerable<Card<T>>
     {
-        public const int NONE = -1;
+        static Random _rnd = new Random();
+
+        const int NONE = -1;
 
         readonly int numberOfPairs;
         readonly Card<T>[] places;
@@ -76,8 +78,7 @@ namespace MemoryGame.Core
                 this.places[numberOfPairs + i] = new Card<T>(piece.Value);
             }
 
-            var rnd = new Random((int)DateTime.Now.Ticks);
-            var randomPlaces = this.places.OrderBy(p => rnd.Next()).ToArray();
+            var randomPlaces = this.places.OrderBy(p => _rnd.Next()).ToArray();
             randomPlaces.CopyTo(this.places, 0);
         }
 

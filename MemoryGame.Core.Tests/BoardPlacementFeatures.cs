@@ -66,7 +66,7 @@ namespace MemoryGame.Core.Tests
             var cardPositions = new HashSet<int>();
 
             // Act
-            for(var i=0; i < 400; i++)
+            for(var i=0; i<400; i++)
             {
                 Setup();
                 var firstCard = board.First();
